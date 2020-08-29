@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {addSmurf} from '../actions/smurfActions';
+import { connect } from 'react-redux';
 
 
 
-function SmurfForm() {
-    const [newForm, setNewForm] = useState({name: "", age: "", id: Date.now(), height: ""});
+
+function SmurfForm(props) {
+    const [newForm, setNewForm] = useState({name: "", age: "", height: ""});
 
     const handleChange = event => {
         console.log(event.target.name);
@@ -16,7 +18,7 @@ function SmurfForm() {
 
     const handleSubmit = event => {
         event.preventDefault();
-        addSmurf(newForm);
+        props.addSmurf(newForm);
         console.log("submitted");
     }
 
@@ -58,4 +60,8 @@ function SmurfForm() {
 
 }
 
-export default SmurfForm;
+const mapDispatchToProps = {
+    addSmurf
+}
+
+export default connect( null, mapDispatchToProps)(SmurfForm);
